@@ -156,16 +156,12 @@ def pegar_nome_vistoriador(texto):
         return resultado.group(1).strip()  # Retorna o conteúdo entre "Nome:" e "Telefone:"
     else:
         return None
-def extrair_fluid(texto):
-    # Procurar todos os números no texto
-    numeros = [int(num) for num in re.findall(r'\d+', texto)]
+def extrair_numeros_fluid(texto):
 
-    # Filtrar os números maiores que 3000
-    maiores_que_3000 = [num for num in numeros if num > 3000]
-
-    # Retornar o segundo número, se existir
-    if len(maiores_que_3000) >= 2:
-        return maiores_que_3000[1]
+    padrao = r'\b\d{7,8}\b'  # Procura por sequências de 7 ou 8 dígitos
+    correspondencia = re.search(padrao, texto)
+    if correspondencia:
+        return correspondencia.group()
     else:
         return None
 def criar_pasta(caminho, nome_da_pasta):
@@ -385,3 +381,5 @@ def deletar_primeiro_eml():
             print(f"Erro ao deletar {first_eml}: {e}")
     else:
         print("Nenhum arquivo .eml encontrado na pasta de Downloads.")
+
+

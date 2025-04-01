@@ -12,7 +12,3 @@ estrutura_de_pastas_maquinario = [('DOCUMENTOS','PNG'),'ENVIADOS','FOTOS','PEÇA
 link = "https://docs.google.com/spreadsheets/d/1vicWUWcce-KShRq6HHyTGgXzwT0A6hCJ2d01E_9XlwA/edit?gid=0#gid=0"
 
 
-
-
-
-
