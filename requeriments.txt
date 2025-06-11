@@ -1,0 +1,8 @@
+beautifulsoup4
+pdf2image
+Pillow
+pyautogui
+keyboard
+rarfile
+tk
+pyperclip
