@@ -2,6 +2,10 @@ import webbrowser
 import pyautogui
 import keyboard
 import time
+#importar pastas dentro de pastas
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from functions.manipular_textos.manipular_textos import verificar_se_Tem_textos
 
 def abrir_link(url):
@@ -32,7 +36,8 @@ def ir_pra_ultima_celula_da_coluna():
     while last_cell != False:
         apertar_pra_baixo()
         copiar()
-
+        last_cell = verificar_se_Tem_textos()
+        
 def apertar_Tab():
     pyautogui.press('tab')
     time.sleep(0.3)
