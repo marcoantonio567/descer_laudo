@@ -15,7 +15,9 @@ from functions.pyaytogui.converter_coordenadas import *
 from functions.reggrex.buscar_palavras_chave import *
 from functions.tkinter.escolher_city import *
 from functions.tkinter.fazer_campos_dinamicos import *
+#from functions.tkinter.selecionar_laudo import *
 
+#local_laudo = selecionar_banco()
 cordenadas_do_usuario = obter_resolucao_pyautogui()
 caminho = encontrar_primeiro_eml()
 texto = ler_arquivo_eml(caminho)
@@ -163,12 +165,13 @@ elif tipo_laudo == 'Urbano':
     janela_dinamica()#janela de espera para carregar a pagina do google sheets
 
     clicar_centro_tela()#clicar no centro da tela
-    for area_matricula in app.values:
+    ir_pra_celula_A1()#ir para a celula A1
+    quantidade_matriculas = len(app.valores)
+    verificar_espaco_linha(quantidade_matriculas) #verificando e inserindo celulas no final da planilha , ele ja deixa na celula A1
+    ir_pra_ultima_celula_da_coluna()
+    visao_debaixo()
+    if quantidade_matriculas ==1:
         time.sleep(0.3)
-        ir_pra_celula_A1()#ir para a celula A1
-        ir_pra_ultima_celula_da_coluna()
-        
-    
         escrever_texto('Sicredi')
         apertar_Tab()
         escrever_texto(agencia)
@@ -179,15 +182,15 @@ elif tipo_laudo == 'Urbano':
         apertar_Tab()
         escrever_texto(data_adcionada_7_dias)#aqui ele vai escrever a data de entrega
         apertar_Tab()
-        escrever_texto("Rural")
+        escrever_texto("Urbano")
         apertar_Tab()
         escrever_texto(nome_proponente_geral)
         apertar_Tab()
         escrever_texto(cidade)
         apertar_Tab()
-        escrever_texto(area_matricula)
+        escrever_texto(app.valores[0])
         escrever_texto(' m²')
-        for i in range(3):
+        for i in range(6):
             apertar_Tab()
             
         escrever_texto(quem_vai_Receber_vistoriador)
@@ -198,7 +201,70 @@ elif tipo_laudo == 'Urbano':
         apertar_home()
         time.sleep(0.5)
         apertar_pra_baixo()
+    if quantidade_matriculas >1:
+        time.sleep(0.3)
+        escrever_texto('Sicredi')
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        apertar_Tab()
+        
+        escrever_texto(agencia)
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        apertar_Tab()
+        
+        escrever_texto(fluid)
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        apertar_Tab()
+        
+        escrever_texto(data_convertida)#aqui ele vai escrever a data de solicitação
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        apertar_Tab()
+        
+        escrever_texto(data_adcionada_7_dias)#aqui ele vai escrever a data de entrega
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        apertar_Tab()
+        
+        escrever_texto("Urbano")
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        apertar_Tab()
+        
+        escrever_texto(nome_proponente_geral)
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        apertar_Tab()
+        
+        escrever_texto(cidade)
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        apertar_Tab()
+        
+        for area in app.valores:
+            escrever_texto(area)#aqui digitando a area de matricula
+            apertar_espaco()
+            escrever_texto('m²')
+            time.sleep(0.2)
+            enter()
+            apertar_Tab()
+        contornar_area()#contornando a area pra ela voltar pro inicio
 
+        apertar_Tab()   
+        for i in range(5):#mesclando as colunas[quem marcou a vistoria,vistoriador,data da vistoria,responsavel pelo laudo]
+            mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+            apertar_Tab()
+        
+        escrever_texto(quem_vai_Receber_vistoriador)
+        apertar_espaco()
+        escrever_texto(telefone)
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        
+        apertar_Tab()
+        apertar_home()
     deletar_primeiro_eml()
     
 elif tipo_laudo is None:
@@ -235,7 +301,7 @@ elif tipo_laudo is None:
     apertar_Tab()
     escrever_texto(cidade)
     
-    for i in range(4):
+    for i in range(7):
         apertar_Tab()
         
     escrever_texto(nome_vistoriador)

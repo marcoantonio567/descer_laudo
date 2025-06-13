@@ -56,7 +56,3 @@ def selecionar_banco():
     root.mainloop()
     return app.banco_escolhido  # Retorna o valor selecionado
 
-# Exemplo de uso
-if __name__ == "__main__":
-    banco = selecionar_banco()
-    print(f"Banco armazenado na variável: {banco}")

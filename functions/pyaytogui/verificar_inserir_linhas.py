@@ -36,5 +36,3 @@ def verificar_espaco_linha(quantidade_necessaria):
         
         ir_pra_celula_A1()#indo pra celula a1 indenpendente do resultado
 
-time.sleep(3)
-verificar_espaco_linha(5)
