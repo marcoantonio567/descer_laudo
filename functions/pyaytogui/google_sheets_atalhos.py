@@ -57,10 +57,11 @@ def inserir_linhas_acima():
     time.sleep(0.1)
 
 def contornar_area():
+    time.sleep(0.2)
     esquerda()
     pyautogui.hotkey('ctrl','up')
-    apertar_pra_baixo()
     direita()
+    
     
 def voltar_celula():
     apertar_Tab()

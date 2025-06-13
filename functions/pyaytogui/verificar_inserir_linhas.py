@@ -19,6 +19,7 @@ def verificar_espaco_linha(quantidade_necessaria):
         copiar()
         last_cell = verificar_se_Tem_textos()
         espaco_atual = 0 
+        #aqui em baixo ele ta verificando o espaço atual
         while last_cell != True:
             apertar_pra_baixo()
             copiar()
@@ -26,10 +27,14 @@ def verificar_espaco_linha(quantidade_necessaria):
             espaco_atual +=1
         
         cima()
+        
         time.sleep(0.1)
-        if espaco_atual<quantidade_necessaria:
-            while (espaco_atual<quantidade_necessaria):
-                inserir_linhas_acima()
-                espaco_atual +=1
-            inserir_linhas_acima()#fazendo isso aqui pra sempre deixar uma linha a mais na planilha
+        #inserindo linhas na planilha
+        while espaco_atual<=quantidade_necessaria:
+            inserir_linhas_acima()
+            espaco_atual +=1
+        
         ir_pra_celula_A1()#indo pra celula a1 indenpendente do resultado
+
+time.sleep(3)
+verificar_espaco_linha(5)

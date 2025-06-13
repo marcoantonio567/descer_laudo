@@ -40,13 +40,13 @@ def mesclar_e_centralizar_celulas(quantidade_celulas,resolucao=()):
         celula = pixel_convertido*quantidade_celulas #px
         new_y = ajustado[1] + celula #soma o valor que ja tava no y com a quantidade de celulas pra mesclar
         pyautogui.mouseDown()  # Pressiona o botão esquerdo
-        pyautogui.moveTo(ajustado[0], new_y, duration=1)  # Arrasta até a nova posição
+        pyautogui.moveTo(ajustado[0], new_y, duration=0.1)  # Arrasta até a nova posição
         pyautogui.mouseUp()  # Solta o botão do mouse
-        time.sleep(0.2)
+        time.sleep(0.1)
         mesclar()
-        time.sleep(0.2)
+        time.sleep(0.1)
         centralizar_texto_meio()
-        time.sleep(0.2)
+        time.sleep(0.1)
         #mesclar celulas --> lower
         #alinhamento de texto: meio --> lower
     else:

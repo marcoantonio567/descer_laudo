@@ -42,9 +42,9 @@ if tipo_laudo == 'Rural':
     cidade = escolher_cidade()
 
     root = tk.Tk() #criar a interface grafica para escolher as areas
-    app = DynamicInputsApp(root) #para charmar os campos dinamicos e so colocar app.values
+    app = GeradorDeInputs(root) #para charmar os campos dinamicos e so colocar app.values
     root.mainloop()#fim da interface grafica para escolher as areas
-    quantidade_matriculas = len(app.values)
+    quantidade_matriculas = len(app.valores)
     abrir_link(link)#abrir o link do google sheets
     janela_dinamica()#janela de espera para carregar a pagina do google sheets
     clicar_centro_tela()#clicar no centro da tela
@@ -69,7 +69,7 @@ if tipo_laudo == 'Rural':
         apertar_Tab()
         escrever_texto(cidade)
         apertar_Tab()
-        escrever_texto(app.values[0])#aqui digitando a area de matricula
+        escrever_texto(app.valores[0])#aqui digitando a area de matricula
         escrever_texto(' ha')
         for i in range(6):#indo pra quem ira receber o vistoriador
             apertar_Tab()
@@ -121,13 +121,20 @@ if tipo_laudo == 'Rural':
         mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
         
         apertar_Tab()
-        for area in app.values[0]:
+        for area in app.valores:
             escrever_texto(area)#aqui digitando a area de matricula
+            apertar_espaco()
             escrever_texto(' ha')
-        contornar_area()#contornando a area pra ela voltar pro inicio
-        for i in range(6):#indo pra quem ira receber o vistoriador
+            time.sleep(0.2)
+            enter()
             apertar_Tab()
-            
+        contornar_area()#contornando a area pra ela voltar pro inicio
+
+        apertar_Tab()
+        for i in range(5):#mesclando as colunas[quem marcou a vistoria,vistoriador,data da vistoria,responsavel pelo laudo]
+            mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+            apertar_Tab()
+        
         escrever_texto(quem_vai_Receber_vistoriador)
         apertar_espaco()
         escrever_texto(telefone)
@@ -149,7 +156,7 @@ elif tipo_laudo == 'Urbano':
     cidade = escolher_cidade()
     
     root = tk.Tk() #criar a interface grafica para escolher as areas
-    app = DynamicInputsApp(root) #para charmar os campos dinamicos e so colocar app.values
+    app = GeradorDeInputs(root) #para charmar os campos dinamicos e so colocar app.valores
     root.mainloop()#fim da interface grafica para escolher as areas
 
     abrir_link(link)#abrir o link do google sheets
