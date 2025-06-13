@@ -17,3 +17,9 @@ def converter_cordenadas(x_base,y_base):
 
     return x_real,y_real
 
+def obter_resolucao_pyautogui():
+    """ja busca com a tela convertida pra se adpatar com o monitor"""
+    x, y = pyautogui.size()
+    largura, altura  = converter_cordenadas(x,y)
+    return largura , altura
+

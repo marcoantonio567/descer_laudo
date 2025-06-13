@@ -8,6 +8,7 @@ from functions.outras_funcoes.distancia import converter_pixels
 from functions.pyaytogui.google_sheets_atalhos import mesclar , centralizar_texto_meio
 
 def mesclar_e_centralizar_celulas(quantidade_celulas,resolucao=()):
+    time.sleep(0.5)
     # Cor alvo (R, G, B)
     target_color = (26, 115, 232)
 
@@ -27,7 +28,7 @@ def mesclar_e_centralizar_celulas(quantidade_celulas,resolucao=()):
         return None
 
     # Espera um segundo para o usuário preparar a tela
-    time.sleep(1)
+    
 
     # Procurar e clicar
     pos = encontrar_cor_na_tela(target_color)
@@ -50,3 +51,5 @@ def mesclar_e_centralizar_celulas(quantidade_celulas,resolucao=()):
         #alinhamento de texto: meio --> lower
     else:
         print("Cor não encontrada na tela.")
+
+#mesclar_e_centralizar_celulas(4,resolucao=(1366,768))

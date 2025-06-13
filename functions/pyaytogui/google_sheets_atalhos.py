@@ -5,7 +5,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from functions.manipular_textos.manipular_textos import verificar_se_Tem_textos
-from functions.pyaytogui.funcoes_teclado_mouse import copiar,apertar_pra_baixo,enter
+from functions.pyaytogui.funcoes_teclado_mouse import copiar,apertar_pra_baixo,enter,esquerda,direita,cima,apertar_Tab
 
 def mesclar():
     pyautogui.keyDown('alt')
@@ -55,3 +55,18 @@ def inserir_linhas_acima():
     time.sleep(0.1)
     enter()
     time.sleep(0.1)
+
+def contornar_area():
+    esquerda()
+    pyautogui.hotkey('ctrl','up')
+    apertar_pra_baixo()
+    direita()
+    
+def voltar_celula():
+    apertar_Tab()
+    esquerda()
+
+def visao_debaixo():
+    pyautogui.hotkey('ctrl','down')
+    pyautogui.hotkey('ctrl','up')
+    apertar_pra_baixo()

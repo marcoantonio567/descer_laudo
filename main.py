@@ -1,12 +1,22 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+
 from functions.manipular_textos.textos import *
 from functions.manipular_textos.manipular_textos import *
 from functions.manipular_windos.manipular_windos import *
 from functions.outras_funcoes.outras_funcoes import *
 from functions.pyaytogui.funcoes_teclado_mouse import *
+from functions.pyaytogui.google_sheets_atalhos import *
+from functions.pyaytogui.mesclar_alinhar_celulas import *
+from functions.pyaytogui.verificar_inserir_linhas import *
+from functions.pyaytogui.converter_coordenadas import *
 from functions.reggrex.buscar_palavras_chave import *
 from functions.tkinter.escolher_city import *
 from functions.tkinter.fazer_campos_dinamicos import *
 
+cordenadas_do_usuario = obter_resolucao_pyautogui()
 caminho = encontrar_primeiro_eml()
 texto = ler_arquivo_eml(caminho)
 tipo_laudo = verificar_tipo_laudo(texto)
@@ -34,15 +44,14 @@ if tipo_laudo == 'Rural':
     root = tk.Tk() #criar a interface grafica para escolher as areas
     app = DynamicInputsApp(root) #para charmar os campos dinamicos e so colocar app.values
     root.mainloop()#fim da interface grafica para escolher as areas
-
+    quantidade_matriculas = len(app.values)
     abrir_link(link)#abrir o link do google sheets
     janela_dinamica()#janela de espera para carregar a pagina do google sheets
-
     clicar_centro_tela()#clicar no centro da tela
-    ir_pra_celula_A1()#ir para a celula A1
+    verificar_espaco_linha(quantidade_matriculas) #verificando e inserindo celulas no final da planilha , ele ja deixa na celula A1
     ir_pra_ultima_celula_da_coluna()
-    
-    for area_matricula in app.values:
+    visao_debaixo()
+    if quantidade_matriculas==1:
         time.sleep(0.3)
         escrever_texto('Sicredi')
         apertar_Tab()
@@ -60,9 +69,9 @@ if tipo_laudo == 'Rural':
         apertar_Tab()
         escrever_texto(cidade)
         apertar_Tab()
-        escrever_texto(area_matricula)
+        escrever_texto(app.values[0])#aqui digitando a area de matricula
         escrever_texto(' ha')
-        for i in range(3):
+        for i in range(6):#indo pra quem ira receber o vistoriador
             apertar_Tab()
             
         escrever_texto(quem_vai_Receber_vistoriador)
@@ -70,9 +79,63 @@ if tipo_laudo == 'Rural':
         escrever_texto(telefone)
         apertar_Tab()
         apertar_home()
-        time.sleep(0.5)
+    if quantidade_matriculas>1:
+        time.sleep(0.3)
+        escrever_texto('Sicredi')
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
         
-        apertar_pra_baixo()
+        apertar_Tab()
+        escrever_texto(agencia)
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        
+        apertar_Tab()
+        escrever_texto(fluid)
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        
+        apertar_Tab()
+        escrever_texto(data_convertida)#aqui ele vai escrever a data de solicitação
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        
+        apertar_Tab()
+        escrever_texto(data_adcionada_7_dias)#aqui ele vai escrever a data de entrega
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)  
+        
+        apertar_Tab()
+        escrever_texto("Rural")
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        
+        apertar_Tab()
+        escrever_texto(nome_proponente_geral)
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        
+        apertar_Tab()
+        escrever_texto(cidade)
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        
+        apertar_Tab()
+        for area in app.values[0]:
+            escrever_texto(area)#aqui digitando a area de matricula
+            escrever_texto(' ha')
+        contornar_area()#contornando a area pra ela voltar pro inicio
+        for i in range(6):#indo pra quem ira receber o vistoriador
+            apertar_Tab()
+            
+        escrever_texto(quem_vai_Receber_vistoriador)
+        apertar_espaco()
+        escrever_texto(telefone)
+        voltar_celula()
+        mesclar_e_centralizar_celulas(quantidade_matriculas,cordenadas_do_usuario)
+        
+        apertar_Tab()
+        apertar_home()
     deletar_primeiro_eml()
     
 elif tipo_laudo == 'Urbano':
