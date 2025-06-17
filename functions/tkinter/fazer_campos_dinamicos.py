@@ -69,5 +69,12 @@ class GeradorDeInputs:
 
     def obter_valores(self, event=None):
         self.valores = [entrada.get() for entrada in self.entradas]
-        self.root.quit()  # Para sair do loop principal (mainloop)
+        self.root.quit()     # Encerra o loop
+        self.root.destroy()  # Destroi a janela
 
+
+def selecionar_matriculas():
+    root = tk.Tk()
+    app = GeradorDeInputs(root)
+    root.mainloop()
+    return app.valores

@@ -6,14 +6,19 @@ class RespostaDinamica:
     def __init__(self, root, texto_pergunta, opcoes):
         self.root = root
         self.texto_pergunta = texto_pergunta
-        self.opcoes = opcoes  # Lista de opções personalizada
-
-        self.root.title("Pergunta")
-        self.root.geometry("520x360")
-        self.root.configure(bg="#ebf5fe")  # Fundo azul claro
+        self.opcoes = opcoes
 
         self.resposta_var = tk.StringVar()
         self.resposta_escolhida = None
+
+        # Calcular altura da janela baseada na quantidade de opções
+        altura_base = 200  # Altura base para título e botão
+        altura_por_opcao = 40  # Altura para cada opção
+        altura_total = altura_base + len(opcoes) * altura_por_opcao
+
+        self.root.title("Pergunta")
+        self.root.geometry(f"520x{altura_total}")
+        self.root.configure(bg="#ebf5fe")
 
         self._estilizar()
         self._construir_interface()
@@ -62,11 +67,3 @@ def selecionar_resposta(texto_pergunta, opcoes):
     app = RespostaDinamica(root, texto_pergunta, opcoes)
     root.mainloop()
     return app.resposta_escolhida
-
-
-# ✅ Exemplo de uso:
-resposta = selecionar_resposta(
-    "Qual instituição você utiliza?",
-    ["Sicredi", "Sicoob", "BASA", "Particular"]
-)
-print(f"Resposta selecionada: {resposta}")

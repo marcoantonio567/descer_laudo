@@ -1,3 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from functions.tkinter.input_Texto_dinamico import input_texto_dinamico
+from functions.tkinter.campo_dinamico_opcoes import selecionar_resposta
+from functions.tkinter.data_dinamica import input_data_dinamico
+
 import re
 
 def extrair_nome(texto):
@@ -10,7 +17,7 @@ def extrair_nome(texto):
         nome = nome.replace(" Conta", "")  # Remove "Conta" se aparecer no final
         return nome
     else:
-        return "Nome não encontrado."
+        return input_texto_dinamico("O nome não foi encontrado por favor digite o nome")
     
 def encontrar_data(texto):
     # Expressão regular para capturar o formato "21 de jan de 2025"
@@ -23,8 +30,9 @@ def encontrar_data(texto):
         # Capturar os grupos e reconstruir a data
         dia, mes, ano = match.groups()
         return f"{dia} de {mes} de {ano}"
-
-    return None
+    else:
+        return input_data_dinamico()
+    
 def verificar_tipo_laudo(texto):
     # Expressão regular para pegar a primeira palavra após "Tipo de Imóvel:"
     padrao = r"Tipo de Imóvel:\s*(\w+)"
@@ -34,12 +42,15 @@ def verificar_tipo_laudo(texto):
 
     if resultado:
         tipo_imovel = resultado.group(1)
-        if tipo_imovel.lower() in ['rural', 'urbano']:
-            return tipo_imovel.capitalize()
-        else:
-            return None
+        tipo_imovel.lower() in ['rural', 'urbano']
+        return tipo_imovel.capitalize()
     else:
-        return None
+        resposta = selecionar_resposta("deseja seguir esse laudo como maquinario?",["Sim", "Não"])
+        if resposta == 'Sim':
+            return None
+        else:
+            resposta = selecionar_resposta("Qual tipo de laudo",["Rural", "Urbano"])
+            return resposta
 def extrair_agencia_cnpj(texto):
      # Usando expressão regular para capturar tudo entre "Agência:" e "CNPJ"
     padrao = r'Agencia:\s*(.*?)\s*CNPJ'
@@ -48,7 +59,7 @@ def extrair_agencia_cnpj(texto):
     if resultado:
         return resultado.group(1).strip()  # Retorna o texto encontrado entre as palavras
     else:
-        return None  # Caso não encontre o padrão
+        return input_texto_dinamico("Agencia não foi encontrada por favor digite a Agencia")  # Caso não encontre o padrão
 def extrair_quem_vai_Receber_vistoriador_rural_urbano(texto):
     # Usando expressão regular para capturar tudo entre "vistoriador Nome:" e "Telefone:"
     padrao = r'vistoriador Nome:\s*(.*?)\s*Telefone:'
@@ -57,7 +68,7 @@ def extrair_quem_vai_Receber_vistoriador_rural_urbano(texto):
     if resultado:
         return resultado.group(1).strip()  # Retorna o texto encontrado entre as palavras
     else:
-        return None  # Caso não encontre o padrão
+        return input_texto_dinamico("quem ira receber o vistoriador não foi encontrado\n por favor digite o nome")  # Caso não encontre o padrão
 def extrair_telefone_numero_rural_urbano(texto):
     # Usando expressão regular para capturar tudo entre "Telefone:" e "Número"
     padrao = r'Telefone:\s*(.*?)\s*Número'
@@ -66,7 +77,7 @@ def extrair_telefone_numero_rural_urbano(texto):
     if resultado:
         return resultado.group(1).strip()  # Retorna o texto encontrado entre as palavras
     else:
-        return None  # Caso não encontre o padrão
+        return input_texto_dinamico("O telefone não foi encontrado por favor digite o telefone")  # Caso não encontre o padrão
 def extrair_telefone_vistoriador(texto):
     # Expressão regular para capturar tudo entre "Telefone:" e "Contato"
     padrao = r"Telefone:\s*(.*?)\s*(?=Contato)"
@@ -77,7 +88,7 @@ def extrair_telefone_vistoriador(texto):
     if resultado:
         return resultado.group(1).strip()  # Retorna o texto encontrado entre "Telefone:" e "Contato"
     else:
-        return None
+        return input_texto_dinamico("O telefone não foi encontrado por favor digite o telefone")
 def pegar_nome_vistoriador(texto):
     # Expressão regular para encontrar a palavra "consorciado" seguida pelo texto entre "Nome:" e "Telefone:"
     padrao = r'consorciado.*?Nome:(.*?)Telefone:'
@@ -89,7 +100,7 @@ def pegar_nome_vistoriador(texto):
     if resultado:
         return resultado.group(1).strip()  # Retorna o conteúdo entre "Nome:" e "Telefone:"
     else:
-        return None
+        return input_texto_dinamico("O nome do consorciado não foi encontrado por favor digite o nome")
 def extrair_numeros_fluid(texto):
 
     padrao = r'\b\d{7,8}\b'  # Procura por sequências de 7 ou 8 dígitos
@@ -97,4 +108,4 @@ def extrair_numeros_fluid(texto):
     if correspondencia:
         return correspondencia.group()
     else:
-        return None
+        return input_texto_dinamico("O fluid não foi encontrado por favor digite o fluid")

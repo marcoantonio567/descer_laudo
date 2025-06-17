@@ -1,8 +1,14 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+from functions.tkinter.input_zip import *
 import os
 import shutil
 import rarfile
 import zipfile
 import glob
+
 
 def encontrar_primeiro_eml():
     # Caminho da pasta Downloads do usuário
@@ -61,39 +67,57 @@ def criar_estrutura_de_pastas(diretorio_base, estrutura_pastas):
                 caminho_documentos = pasta
 
     return caminho_documentos
-def mover_zip(destination_path):
-    downloads_path = os.path.expanduser("~/Downloads")
-    # Certifique-se de que os diretórios existem
-    if not os.path.exists(downloads_path):
-        print(f"O diretório {downloads_path} não existe.")
-        return None
+def mover_zip(destination_path, outros_documentos='Não'):
+    if outros_documentos.strip().lower() == 'sim':
+        arquivo_selecionado = selecionar_arquivo_comprimido_obrigatorio()
 
-    if not os.path.exists(destination_path):
-        os.makedirs(destination_path)
+        if not arquivo_selecionado or not os.path.isfile(arquivo_selecionado):
+            print("Nenhum arquivo válido selecionado.")
+            return None
 
-    # Obtenha uma lista de arquivos na pasta de downloads
-    files = os.listdir(downloads_path)
+        if not os.path.exists(destination_path):
+            os.makedirs(destination_path)
 
-    # Filtre os arquivos com extensões .rar ou .zip
-    compressed_files = [f for f in files if f.endswith('.rar') or f.endswith('.zip')]
+        nome_arquivo = os.path.basename(arquivo_selecionado)
+        destino = os.path.join(destination_path, nome_arquivo)
 
-    if not compressed_files:
-        print("Nenhum arquivo .rar ou .zip encontrado na pasta de downloads.")
-        return None
+        try:
+            shutil.move(arquivo_selecionado, destino)
+            print(f"Arquivo {nome_arquivo} movido para {destination_path} com sucesso.")
+            return destino
+        except Exception as e:
+            print(f"Erro ao mover o arquivo: {e}")
+            return None
 
-    # Pegue o primeiro arquivo encontrado
-    first_file = compressed_files[0]
-    source_file = os.path.join(downloads_path, first_file)
-    destination_file = os.path.join(destination_path, first_file)
+    else:
+        downloads_path = os.path.expanduser("~/Downloads")
 
-    # Mova o arquivo para o destino
-    try:
-        shutil.move(source_file, destination_file)
-        print(f"Arquivo {first_file} movido para {destination_path} com sucesso.")
-        return destination_file
-    except Exception as e:
-        print(f"Erro ao mover o arquivo: {e}")
-        return None
+        if not os.path.exists(downloads_path):
+            print(f"O diretório {downloads_path} não existe.")
+            return None
+
+        if not os.path.exists(destination_path):
+            os.makedirs(destination_path)
+
+        files = os.listdir(downloads_path)
+
+        compressed_files = [f for f in files if f.endswith('.rar') or f.endswith('.zip')]
+
+        if not compressed_files:
+            print("Nenhum arquivo .rar ou .zip encontrado na pasta de downloads.")
+            return None
+
+        first_file = compressed_files[0]
+        source_file = os.path.join(downloads_path, first_file)
+        destination_file = os.path.join(destination_path, first_file)
+
+        try:
+            shutil.move(source_file, destination_file)
+            print(f"Arquivo {first_file} movido para {destination_path} com sucesso.")
+            return destination_file
+        except Exception as e:
+            print(f"Erro ao mover o arquivo: {e}")
+            return None
 def extrair_arquivo_zip(file_path):
     # Obtém o diretório onde o arquivo está localizado
     extract_to = os.path.dirname(file_path)

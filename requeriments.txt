@@ -6,3 +6,4 @@ keyboard
 rarfile
 tk
 pyperclip
+tkcalendar

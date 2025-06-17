@@ -8,12 +8,24 @@ def converter_data(data_str):
         "set": "09", "out": "10", "nov": "11", "dez": "12"
     }
     
-    partes = data_str.lower().split(" de ")
-    dia = partes[0].zfill(2)
-    mes = meses.get(partes[1], "00")
-    ano = partes[2]
+    try:
+        partes = data_str.lower().split(" de ")
+        if len(partes) != 3:
+            return data_str  # Retorna a string original se não tiver 3 partes
+
+        dia = partes[0].zfill(2)
+        mes = meses.get(partes[1], None)
+
+        if mes is None:
+            return data_str  # Retorna a string original se não encontrar o mês
+
+        ano = partes[2]
+
+        return f"{dia}/{mes}/{ano}"
     
-    return f"{dia}/{mes}/{ano}"
+    except Exception:
+        return data_str  # Se der qualquer outro erro, retorna a string original
+
 def adicionar_7_dias(data_str):
     # Converte a string para um objeto datetime
     data = datetime.strptime(data_str, "%d/%m/%Y")

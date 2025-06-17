@@ -1,19 +1,19 @@
 import tkinter as tk
 from tkinter import ttk
 
-def escolher_cidade():
-    cidade_selecionada = None  # Variável para armazenar a cidade escolhida
+def input_texto_dinamico(titulo):
+    input_selecionado = None  # Variável para armazenar a input escolhida
 
     def confirmar(event=None):
-        nonlocal cidade_selecionada  # Permite modificar a variável externa
-        cidade = entrada.get()
-        if cidade:
-            cidade_selecionada = cidade  # Armazena o valor digitado
+        nonlocal input_selecionado  # Permite modificar a variável externa
+        input = entrada.get()
+        if input:
+            input_selecionado = input  # Armazena o valor digitado
             root.destroy()  # Fecha a interface de forma segura
 
     # Criar a janela principal
     root = tk.Tk()
-    root.title("Qual o nome da cidade do imóvel")
+    root.title(titulo)
     root.geometry("400x200")
     root.configure(bg="#282c34")
 
@@ -24,7 +24,7 @@ def escolher_cidade():
     estilo.configure("TButton", font=("Arial", 12))
 
     # Rótulo
-    label = ttk.Label(root, text="Digite o nome da cidade:")
+    label = ttk.Label(root, text=titulo)
     label.pack(pady=20)
 
     # Entrada
@@ -43,4 +43,5 @@ def escolher_cidade():
     root.mainloop()
     #root.destroy()  # Fecha a janela após o loop principal
 
-    return cidade_selecionada  # Retorna a cidade digitada
+    return input_selecionado  # Retorna a input digitada
+
