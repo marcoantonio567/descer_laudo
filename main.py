@@ -19,6 +19,7 @@ from functions.tkinter.campo_dinamico_opcoes import *
 from functions.tkinter.formulario import *
 from functions.precessamento.rural.processar_rural import *
 from functions.precessamento.urbano.processar_urbano import *
+from functions.precessamento.maquinario.processar_maquinario import *
 
 instituicao = selecionar_resposta("Selecione qual a instituição",[
     "Sicredi",
@@ -36,5 +37,7 @@ if tipo_laudo == 'Rural':
     gerenciar_rurais(instituicao=instituicao)
 if tipo_laudo == 'Urbano':
     gerenciar_Urbano(instituicao=instituicao)
+if tipo_laudo == 'Maquinario':
+    gerenciar_maquinario(instituicao=instituicao)
     
     
