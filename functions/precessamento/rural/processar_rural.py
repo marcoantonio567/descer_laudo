@@ -21,7 +21,7 @@ from functions.tkinter.input_zip import *
 
 
 
-#instituicao = selecionar_resposta("Selecione qual a instituição",["Sicredi", "Sicoob", "BASA", "Particular"])
+
 def gerenciar_rurais(instituicao):
 
     cordenadas_do_usuario = obter_resolucao_pyautogui()
@@ -30,7 +30,7 @@ def gerenciar_rurais(instituicao):
     else:
         possui_eml = 'não'
         
-    possui_documentos = selecionar_resposta("Documentos externos do sicredi? (docummentos que não são do email)",['Sim','Não'])
+    possui_documentos = selecionar_resposta("Documentos externos do sicredi?\n(docummentos que não são do email)",['Sim','Não'])
     if possui_eml == 'Sim':
         caminho = encontrar_primeiro_eml()
         texto = ler_arquivo_eml(caminho)

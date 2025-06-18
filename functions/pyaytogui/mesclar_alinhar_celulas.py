@@ -8,7 +8,7 @@ from functions.outras_funcoes.distancia import converter_pixels
 from functions.pyaytogui.google_sheets_atalhos import mesclar , centralizar_texto_meio
 
 def mesclar_e_centralizar_celulas(quantidade_celulas,resolucao=()):
-    time.sleep(0.5)
+    time.sleep(0.2)
     # Cor alvo (R, G, B)
     target_color = (26, 115, 232)
 

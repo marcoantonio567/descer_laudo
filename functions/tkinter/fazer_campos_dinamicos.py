@@ -25,7 +25,7 @@ class GeradorDeInputs:
         self.frame_top = tk.Frame(self.root, bg='#2a2a3d', padx=20, pady=20)
         self.frame_top.pack(fill='x')
 
-        self.label_qtd = ttk.Label(self.frame_top, text="Quantos matriculas deseja? (1-10):")
+        self.label_qtd = ttk.Label(self.frame_top, text="Quantos matriculas \nou maquinas deseja? (1-10):")
         self.label_qtd.pack(side='left', padx=(0, 10))
 
         self.entry_qtd = ttk.Entry(self.frame_top, width=5)
@@ -56,7 +56,7 @@ class GeradorDeInputs:
         self.entradas.clear()
 
         for i in range(qtd):
-            label = ttk.Label(self.frame_inputs, text=f"matricula {i+1}:", style='TLabel')
+            label = ttk.Label(self.frame_inputs, text=f"Area Ou Maquina {i+1}:", style='TLabel')
             label.grid(row=i, column=0, padx=5, pady=5, sticky='e')
 
             entrada = ttk.Entry(self.frame_inputs, width=30)
@@ -78,3 +78,5 @@ def selecionar_matriculas():
     app = GeradorDeInputs(root)
     root.mainloop()
     return app.valores
+
+
