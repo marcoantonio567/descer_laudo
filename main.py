@@ -24,6 +24,7 @@ from functions.precessamento.maquinario.processar_maquinario import *
 instituicao = selecionar_resposta("Selecione qual a instituição",[
     "Sicredi",
     "Banco da Amazônia",
+    "BASA",
     "BRB",
     "Pericia",
     "Particular",

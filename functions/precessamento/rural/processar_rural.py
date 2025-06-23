@@ -61,6 +61,7 @@ def gerenciar_rurais(instituicao):
     caminhos = {
         'Sicredi': caminho_rural,
         'Banco da Amazônia': caminho_basa,
+        'BASA': caminho_basa,
         'Particular': caminho_particular,
         'BRB': caminho_BRB,
         'Sicoob TO': caminho_sicoob,
