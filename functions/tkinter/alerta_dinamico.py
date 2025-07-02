@@ -1,6 +1,6 @@
 import tkinter as tk
 
-def show_alert(message):
+def show_alert_dinamic(message):
     def flash():
         # Alterna o fundo entre as duas cores
         nonlocal current_color_index
@@ -51,7 +51,5 @@ def show_alert(message):
     flash()
     root.mainloop()
 
-# Exemplo de uso:
-if __name__ == "__main__":
-    texto = "ATENÇÃO!\n\n   não mexa nesta janela enquanto\nnão aparecer uma outra janela"
-    show_alert(texto)
+
+    

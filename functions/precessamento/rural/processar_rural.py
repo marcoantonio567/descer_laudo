@@ -19,6 +19,7 @@ from functions.tkinter.fazer_campos_dinamicos import *
 from functions.tkinter.campo_dinamico_opcoes import *
 from functions.tkinter.formulario import *
 from functions.tkinter.input_zip import *
+from functions.tkinter.alerta_dinamico import *
 
 
 
@@ -93,7 +94,8 @@ def gerenciar_rurais(instituicao):
 
     quantidade_matriculas = len(areas_matriculas)
     abrir_link(link)#abrir o link do google sheets
-    janela_dinamica()#janela de espera para carregar a pagina do google sheets
+    texto = "ATENÇÃO!\n\n   não mexa nesta janela enquanto\nnão aparecer uma outra janela"
+    show_alert_dinamic(texto)
     clicar_centro_tela()#clicar no centro da tela
     verificar_espaco_linha(quantidade_matriculas) #verificando e inserindo celulas no final da planilha , ele ja deixa na celula A1
     ir_pra_ultima_celula_da_coluna()
