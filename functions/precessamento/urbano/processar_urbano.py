@@ -32,7 +32,7 @@ def gerenciar_Urbano(instituicao):
     else:
         possui_eml = 'não'
         
-    possui_documentos_via_email = selecionar_resposta("Documentos externos do sicredi?\n(docummentos que não são do email)",['Sim','Não'])
+    possui_documentos_via_email = possui_documentos_via_email = selecionar_resposta("Os Documentos Vinheram via E-mail?",['Sim','Não'])
     if possui_eml == 'Sim':
         caminho = encontrar_primeiro_eml()
         texto = ler_arquivo_eml(caminho)
