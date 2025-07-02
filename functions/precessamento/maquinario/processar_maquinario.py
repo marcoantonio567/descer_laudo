@@ -14,6 +14,7 @@ from functions.pyaytogui.verificar_inserir_linhas import *
 from functions.pyaytogui.converter_coordenadas import *
 from functions.reggrex.buscar_palavras_chave import *
 from functions.tkinter.input_Texto_dinamico import *
+from functions.tkinter.input_de_cidade import *
 from functions.tkinter.fazer_campos_dinamicos import *
 from functions.tkinter.campo_dinamico_opcoes import *
 from functions.tkinter.formulario import *
@@ -42,13 +43,13 @@ def gerenciar_maquinario(instituicao):
         fluid = str(extrair_numeros_fluid(texto))
         quem_vai_Receber_vistoriador = extrair_quem_vai_Receber_vistoriador_rural_urbano(texto)
         telefone = extrair_telefone_numero_rural_urbano(texto)
-        cidade = input_texto_dinamico("Digite o nome da cidade:")
+        cidade = selecionar_estado_cidade()
 
     else:
         dados = dados_formulario()
         nome_proponente_geral = dados['Proponente']
         data = dados['Data']
-        cidade = dados['Cidade']
+        cidade = selecionar_estado_cidade()
         data_convertida = converter_data(data)
         data_adcionada_7_dias = adicionar_7_dias(data_convertida)
         agencia = dados['Agência Solicitante']

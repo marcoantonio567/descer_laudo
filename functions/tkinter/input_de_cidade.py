@@ -136,8 +136,3 @@ def selecionar_estado_cidade():
     app = EstadoCidadeSelector()
     app.mainloop()
     return app.resultado
-
-
-
-escolha = selecionar_estado_cidade()
-print(escolha)

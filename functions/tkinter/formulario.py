@@ -76,9 +76,7 @@ class Formulario:
         self.campo5 = ttk.Entry(frame)
         self.campo5.pack(fill="x", **padding)
 
-        ttk.Label(frame, text="Selecione a Cidade:").pack(**padding)
-        self.campo6 = ttk.Entry(frame)
-        self.campo6.pack(fill="x", **padding)
+        
 
         ttk.Label(frame, text="Nome e telefone de quem vai receber o vistoriador:").pack(**padding)
         self.campo8 = ttk.Entry(frame)
@@ -112,3 +110,4 @@ def dados_formulario():
     root.mainloop()
 
     return formulario.dados
+
