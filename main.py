@@ -17,10 +17,12 @@ from functions.tkinter.input_Texto_dinamico import *
 from functions.tkinter.fazer_campos_dinamicos import *
 from functions.tkinter.campo_dinamico_opcoes import *
 from functions.tkinter.formulario import *
+from functions.tkinter.step_to_step import *
 from functions.precessamento.rural.processar_rural import *
 from functions.precessamento.urbano.processar_urbano import *
 from functions.precessamento.maquinario.processar_maquinario import *
 
+passo_passo()#mostrar o passo a passo
 instituicao = selecionar_resposta("Selecione qual a instituição",[
     "Sicredi",
     "Banco da Amazônia",

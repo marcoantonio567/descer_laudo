@@ -6,7 +6,7 @@ from PIL import Image, ImageTk
 passos = [
     {"imagem": "images/primeiro.png", "legenda": "se o email for via suite do sicredi siga os passos a seguir caso contratrio aperte em pular\n1. Abra o E-mail Desejado e abra suas Configurações"},
     {"imagem": "images/segundo.png", "legenda": "2. Clique em baixar mensagem e coloque em Downloads"},
-    {"imagem": "images/terceiro.png", "legenda": "3. Arraste o E-mail para baixo e aperte em baixar"},
+    {"imagem": "images/terceiro.png", "legenda": "3. Arraste o E-mail para baixo e aperte em baixar\nagora leia com atentamente as janelas de interface"},
 ]
 
 class PassoAPassoApp(tk.Tk):    
