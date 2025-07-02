@@ -67,8 +67,8 @@ def criar_estrutura_de_pastas(diretorio_base, estrutura_pastas):
                 caminho_documentos = pasta
 
     return caminho_documentos
-def mover_zip(destination_path, outros_documentos='Não'):
-    if outros_documentos.strip().lower() == 'sim':
+def mover_zip(destination_path, via_email='sim'):
+    if via_email.strip().lower() == 'não':
         arquivo_selecionado = selecionar_arquivo_comprimido_obrigatorio()
 
         if not arquivo_selecionado or not os.path.isfile(arquivo_selecionado):

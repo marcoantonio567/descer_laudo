@@ -13,7 +13,7 @@ class RespostaDinamica:
 
         # Calcular altura da janela baseada na quantidade de opções
         altura_base = 200  # Altura base para título e botão
-        altura_por_opcao = 40  # Altura para cada opção
+        altura_por_opcao = 50  # Altura para cada opção
         altura_total = altura_base + len(opcoes) * altura_por_opcao
 
         self.root.title("Pergunta")
@@ -67,3 +67,4 @@ def selecionar_resposta(texto_pergunta, opcoes):
     app = RespostaDinamica(root, texto_pergunta, opcoes)
     root.mainloop()
     return app.resposta_escolhida
+

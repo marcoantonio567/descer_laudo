@@ -31,7 +31,7 @@ def gerenciar_maquinario(instituicao):
     else:
         possui_eml = 'não'
         
-    possui_documentos = selecionar_resposta("Documentos externos do sicredi?\n(docummentos que não são do email)",['Sim','Não'])
+    possui_documentos_via_email = selecionar_resposta("Os Documentos Vinheram via E-mail?",['Sim','Não'])
     if possui_eml == 'Sim':
         caminho = encontrar_primeiro_eml()
         texto = ler_arquivo_eml(caminho)
@@ -80,12 +80,12 @@ def gerenciar_maquinario(instituicao):
 
     criar_estutura_e_Retornar_documentos = criar_estrutura_de_pastas(caminho_proponente_e_criacao_pasta,estrutura_de_pastas_maquinario)
 
-    if possui_eml == 'Sim' or possui_documentos == 'Sim':
-        caminho_zip_e_recortar_zip = mover_zip(criar_estutura_e_Retornar_documentos,outros_documentos=possui_documentos)
+    if possui_eml == 'Sim' or possui_documentos_via_email == 'Não':
+        caminho_zip_e_recortar_zip = mover_zip(criar_estutura_e_Retornar_documentos,outros_documentos=possui_documentos_via_email)
         extrair_arquivo_zip(caminho_zip_e_recortar_zip)#aqui ele vai extrair o arquivo zip na propria pasta
         pasta_documentos , pasta_png = obeter_pasta_documentos_e_png(caminho_proponente_e_criacao_pasta)
         convert_pdfs_to_png(pasta_documentos,pasta_png)
-    
+        
     
 
 
