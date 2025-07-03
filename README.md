@@ -1,59 +1,73 @@
-# Descer Laudo
 
-Este projeto automatiza o tratamento de solicitações de avaliação recebidas por
-email. O script lê arquivos `.eml` da pasta `Downloads` do sistema, extrai
-informações importantes e cria uma estrutura de pastas para cada solicitação.
-PDFs anexados são convertidos em imagens PNG e uma planilha do Google é
-preenchida automaticamente com todos os dados extraídos.
+# Descer Laudo 🚀
 
-## Requisitos
+Automatiza o processamento de laudos recebidos por e-mail (arquivos `.eml`), organizando anexos, convertendo PDF em imagens e alimentando planilhas no Google Sheets, além de enviar resultados para servidor de rede.
 
-- Python 3.8+
-- Os pacotes listados em `requeriments.txt`
-- Binários do [Poppler](https://poppler.freedesktop.org/) (já incluídos em
-  `Release-24.08.0-0/poppler-24.08.0`)
+## 🔧 Pré-requisitos
 
-## Instalação
+* **Python 3.8 ou superior**
+* Pacotes Python listados em `requeriments.txt`
+* Binários do Poppler (incluídos em `Release-24.08.0-0/poppler-24.08.0/Library/bin`) ([github.com][1])
 
-Crie um ambiente virtual (opcional) e instale as dependências:
+## 🛠️ Instalação
 
 ```bash
+git clone https://github.com/marcoantonio567/descer_laudo.git
+cd descer_laudo
+python -m venv venv        # opcional, mas recomendado
+source venv/bin/activate   # ou `venv\Scripts\activate` no Windows
 pip install -r requeriments.txt
 ```
 
-Nenhuma configuração extra do Poppler é necessária se a estrutura do repositório
-for mantida, pois o caminho utilizado pelo código já aponta para
-`Release-24.08.0-0/poppler-24.08.0/Library/bin`.
+## ▶️ Uso
 
-## Execução
+1. Coloque os arquivos `.eml` na pasta `Downloads` do sistema.
+2. Execute:
 
-Execute o script principal com Python:
+   ```bash
+   python main.py
+   ```
+3. O script irá:
 
-```bash
-python main.py
-```
+   * Ler o primeiro `.eml` da pasta Downloads.
+   * Extrair informações: tipo de laudo (rural, urbano ou máquinas), dados do solicitante (nome, datas, órgão, telefones etc.).
+   * Criar uma estrutura de diretórios com subpastas para documentos, imagens, fotos etc. ([github.com][1])
+   * Descompactar arquivos ZIP encontrados.
+   * Converter PDFs em PNGs usando os binários do Poppler.
+   * Preencher um Google Sheets via automação de teclado com os dados coletados. ([github.com][1])
 
-O aplicativo procurará o primeiro `.eml` na pasta `Downloads`, analisará seu
-conteúdo e detectará o tipo de laudo (rural, urbano ou máquinas). Uma estrutura
-de pastas será criada nos caminhos de rede pré-definidos e qualquer arquivo
-compactado encontrado em `Downloads` será movido e extraído. Os PDFs dentro da
-pasta `DOCUMENTOS` criada serão convertidos em PNG utilizando o Poppler. Por
-fim, o script abre uma planilha do Google e, por meio de automação de teclado,
-preenche cada linha com os dados extraídos.
+## 🧩 Visão geral do fluxo
 
-## Visão geral da automação
+1. **Extração do `.eml`**: processa o primeiro arquivo disponível em Downloads
+2. **Montagem de pastas**: organiza diretórios conforme o tipo de laudo
+3. **Conversão de PDF**: gera PNGs com Poppler
+4. **Planilha Google**: preenche dados via GUI automation
 
-1. **Extração do EML** – Lê o `.eml` na pasta `Downloads` e extrai nome do
-   solicitante, datas, órgão, telefones e outros campos.
-2. **Criação de pastas** – Monta uma estrutura de diretórios (incluindo
-   subpastas para documentos, PNGs, fotos e outros) de acordo com o tipo de
-   laudo detectado.
-3. **Preenchimento de planilha** – Abre um link pré-configurado do Google Sheets
-   e escreve os dados coletados linha por linha por meio de entrada simulada de
-   teclado.
+---
 
-## Licença
+## 🧪 Testes
 
-Este projeto é distribuído sob os termos da Licença Pública Geral GNU versão 3.
-A distribuição do Poppler inclusa é licenciada sob a GPLv2 ou posterior,
-compatível com este projeto.
+Para testar funcionalidades específicas, confira `testes.py`. Recomenda-se criar mockups ou simular `.eml` com anexos, verificando o comportamento da pipeline completa.
+
+## 🧱 Estrutura do projeto
+
+* `main.py`: orquestra todo o processo
+* `coordenadas.py`: lógica de extração de campos do e-mail
+* `functions/`: funções utilitárias
+* `images/`: imagens usadas no projeto ou geradas pelo script
+* `Release-24.08.0-0/poppler-24.08.0/`: binários Poppler para conversão PDF → PNG
+* `requeriments.txt`: dependências do Python
+* `testes.py`: casos de teste
+
+## 📝 Licença
+
+Distribuído sob a licença **GPL‑3.0**. Os binários do Poppler estão sob **GPL‑2.0 ou posterior**, compatível com este projeto ([github.com][1]).
+
+---
+
+## ⭐ Melhorias sugeridas
+
+* **Parâmetros configuráveis**: definir caminhos (ex: Downloads, Sheets URL) via arquivo `.env` ou `config.yaml`
+* **Autenticação na API do Sheets**: migrar da automação de teclado para uso da API do Google Sheets
+* **Logs e tratamento de erros**: capturar falhas e registrar eventos importantes
+* **Integração contínua (CI)**: adicionar GitHub Actions para rodar `testes.py` automaticamente
