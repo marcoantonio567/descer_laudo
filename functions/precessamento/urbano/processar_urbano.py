@@ -57,7 +57,7 @@ def gerenciar_Urbano(instituicao):
         fluid = dados['Fluid']
         quem_vai_Receber_vistoriador = dados['Responsável pela visita']
         
-    areas_matriculas =  selecionar_matriculas_maquinas()    
+    areas_matriculas =  selecionar_matriculas_maquinas("Area")    
     
     # Mapeamento das instituições para os caminhos
     caminhos = {
