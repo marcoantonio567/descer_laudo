@@ -7,7 +7,7 @@ Automatiza o processamento de laudos recebidos por e-mail (arquivos `.eml`), org
 
 * **Python 3.8 ou superior**
 * Pacotes Python listados em `requeriments.txt`
-* Binários do Poppler (incluídos em `Release-24.08.0-0/poppler-24.08.0/Library/bin`) ([github.com][1])
+* Binários do Poppler (incluídos em `Release-24.08.0-0/poppler-24.08.0/Library/bin`)
 
 ## 🛠️ Instalação
 
@@ -61,7 +61,7 @@ Para testar funcionalidades específicas, confira `testes.py`. Recomenda-se cria
 
 ## 📝 Licença
 
-Distribuído sob a licença **GPL‑3.0**. Os binários do Poppler estão sob **GPL‑2.0 ou posterior**, compatível com este projeto ([github.com][1]).
+Distribuído sob a licença **GPL‑3.0**. Os binários do Poppler estão sob **GPL‑2.0 ou posterior**, compatível com este projeto.
 
 ---
 

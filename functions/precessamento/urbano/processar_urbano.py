@@ -57,7 +57,7 @@ def gerenciar_Urbano(instituicao):
         fluid = dados['Fluid']
         quem_vai_Receber_vistoriador = dados['Responsável pela visita']
         
-    areas_matriculas =  selecionar_matriculas()    
+    areas_matriculas =  selecionar_matriculas_maquinas()    
     
     # Mapeamento das instituições para os caminhos
     caminhos = {
@@ -82,7 +82,7 @@ def gerenciar_Urbano(instituicao):
     criar_estutura_e_Retornar_documentos = criar_estrutura_de_pastas(caminho_proponente_e_criacao_pasta,estrutura_de_pastas_urbano)
 
     if possui_eml == 'Sim' or possui_documentos_via_email == 'Sim':
-        caminho_zip_e_recortar_zip = mover_zip(criar_estutura_e_Retornar_documentos,outros_documentos=possui_documentos_via_email)
+        caminho_zip_e_recortar_zip = mover_zip(criar_estutura_e_Retornar_documentos,via_email=possui_documentos_via_email)
         extrair_arquivo_zip(caminho_zip_e_recortar_zip)#aqui ele vai extrair o arquivo zip na propria pasta
         pasta_documentos , pasta_png = obeter_pasta_documentos_e_png(caminho_proponente_e_criacao_pasta)
         convert_pdfs_to_png(pasta_documentos,pasta_png)

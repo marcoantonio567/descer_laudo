@@ -7,3 +7,4 @@ rarfile
 tk
 pyperclip
 tkcalendar
+pdf2image

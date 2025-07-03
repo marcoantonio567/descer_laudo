@@ -2,12 +2,12 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 
 class GeradorDeInputs:
-    def __init__(self, root):
+    def __init__(self, root , texto):
         self.root = root
         self.root.title("Gerador de Inputs Dinâmicos")
         self.root.geometry("420x480")
         self.root.configure(bg='#1e1e2f')
-
+        self.texto = texto
         self.entradas = []
         self.valores = []  # <- Armazena os valores aqui
         self._estilizar()
@@ -25,7 +25,7 @@ class GeradorDeInputs:
         self.frame_top = tk.Frame(self.root, bg='#2a2a3d', padx=20, pady=20)
         self.frame_top.pack(fill='x')
 
-        self.label_qtd = ttk.Label(self.frame_top, text="Quantos matriculas \nou maquinas deseja? (1-10):")
+        self.label_qtd = ttk.Label(self.frame_top, text=f"Qual a quantidade de \n{self.texto}s que deseja? (1-10):")
         self.label_qtd.pack(side='left', padx=(0, 10))
 
         self.entry_qtd = ttk.Entry(self.frame_top, width=5)
@@ -56,7 +56,7 @@ class GeradorDeInputs:
         self.entradas.clear()
 
         for i in range(qtd):
-            label = ttk.Label(self.frame_inputs, text=f"Area Ou Maquina {i+1}:", style='TLabel')
+            label = ttk.Label(self.frame_inputs, text=f"{self.texto} {i+1}:", style='TLabel')
             label.grid(row=i, column=0, padx=5, pady=5, sticky='e')
 
             entrada = ttk.Entry(self.frame_inputs, width=30)
@@ -73,10 +73,8 @@ class GeradorDeInputs:
         self.root.destroy()  # Destroi a janela
 
 
-def selecionar_matriculas():
+def selecionar_matriculas_maquinas(text):
     root = tk.Tk()
-    app = GeradorDeInputs(root)
+    app = GeradorDeInputs(root,text)
     root.mainloop()
     return app.valores
-
-
