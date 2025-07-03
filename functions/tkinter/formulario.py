@@ -91,7 +91,6 @@ class Formulario:
             "Fluid": self.campo3.get().strip(),
             "Data": self.campo4.get().strip(),
             "Proponente": self.campo5.get().strip(),
-            "Cidade": self.campo6.get().strip(),
             "Responsável pela visita": self.campo8.get().strip()
         }
 
@@ -110,4 +109,3 @@ def dados_formulario():
     root.mainloop()
 
     return formulario.dados
-
