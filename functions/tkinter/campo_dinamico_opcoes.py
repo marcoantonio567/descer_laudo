@@ -16,12 +16,28 @@ class RespostaDinamica:
         altura_por_opcao = 50  # Altura para cada opção
         altura_total = altura_base + len(opcoes) * altura_por_opcao
 
-        self.root.title("Pergunta")
-        self.root.geometry(f"520x{altura_total}")
+        self.root.title("Opções")
         self.root.configure(bg="#ebf5fe")
 
         self._estilizar()
         self._construir_interface()
+        
+        # Configurar a geometria depois de construir a interface
+        self.root.update_idletasks()
+        
+        # Largura fixa como solicitado
+        largura = 520
+        
+        # Obter dimensões da tela
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        
+        # Calcular posição central
+        x = (screen_width // 2) - (largura // 2)
+        y = (screen_height // 2) - (altura_total // 2)
+        
+        # Aplicar geometria centralizada com largura fixa
+        self.root.geometry(f"{largura}x{altura_total}+{x}+{y}")
 
     def _estilizar(self):
         style = ttk.Style(self.root)
@@ -67,4 +83,3 @@ def selecionar_resposta(texto_pergunta, opcoes):
     app = RespostaDinamica(root, texto_pergunta, opcoes)
     root.mainloop()
     return app.resposta_escolhida
-
