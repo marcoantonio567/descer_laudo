@@ -35,7 +35,7 @@ instituicao = selecionar_resposta("Selecione qual a instituição",[
     "Caixa",
 ])
 
-tipo_laudo = selecionar_resposta("Selecione qual a instituição",["Rural","Urbano","Maquinario"])
+tipo_laudo = selecionar_resposta("Selecione qual o tipo de laudo",["Rural","Urbano","Maquinario"])
 if tipo_laudo == 'Rural':
     gerenciar_rurais(instituicao=instituicao)
 if tipo_laudo == 'Urbano':
