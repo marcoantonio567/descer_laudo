@@ -33,6 +33,10 @@ def gerenciar_maquinario(instituicao):
         possui_eml = 'não'
         
     possui_documentos_via_email = selecionar_resposta("Os Documentos Vinheram via E-mail?",['Sim','Não'])
+    if possui_documentos_via_email == 'Não':
+        possui_documentos = selecionar_resposta("possui algum tipo de documento?",['Sim','Não'])
+
+
     if possui_eml == 'Sim':
         caminho = encontrar_primeiro_eml()
         texto = ler_arquivo_eml(caminho)
@@ -80,12 +84,12 @@ def gerenciar_maquinario(instituicao):
 
 
     criar_estutura_e_Retornar_documentos = criar_estrutura_de_pastas(caminho_proponente_e_criacao_pasta,estrutura_de_pastas_maquinario)
-
-    if possui_eml == 'Sim' or possui_documentos_via_email == 'Não':
-        caminho_zip_e_recortar_zip = mover_zip(criar_estutura_e_Retornar_documentos,via_email=possui_documentos_via_email)
-        extrair_arquivo_zip(caminho_zip_e_recortar_zip)#aqui ele vai extrair o arquivo zip na propria pasta
-        pasta_documentos , pasta_png = obeter_pasta_documentos_e_png(caminho_proponente_e_criacao_pasta)
-        convert_pdfs_to_png(pasta_documentos,pasta_png)
+    if possui_documentos == 'Sim':
+        if possui_eml == 'Sim' or possui_documentos_via_email == 'Não':
+            caminho_zip_e_recortar_zip = mover_zip(criar_estutura_e_Retornar_documentos,via_email=possui_documentos_via_email)
+            extrair_arquivo_zip(caminho_zip_e_recortar_zip)#aqui ele vai extrair o arquivo zip na propria pasta
+            pasta_documentos , pasta_png = obeter_pasta_documentos_e_png(caminho_proponente_e_criacao_pasta)
+            convert_pdfs_to_png(pasta_documentos,pasta_png)
         
     
 
@@ -93,7 +97,7 @@ def gerenciar_maquinario(instituicao):
 
     quantidade_maquinarios = len(maquinarios)
     abrir_link(link)#abrir o link do google sheets
-    texto = "ATENÇÃO!\n\n   não mexa nesta janela enquanto\nnão aparecer uma outra janela"
+    texto = "ATENÇÃO!\n\n   Apos o voce apertar 'Entendi'\nnão mexa no computador\nenquanto não aparecer uma outra janela"
     show_alert_dinamic(texto)
     clicar_centro_tela()#clicar no centro da tela
     verificar_espaco_linha(quantidade_maquinarios) #verificando e inserindo celulas no final da planilha , ele ja deixa na celula A1

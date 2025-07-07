@@ -7,7 +7,7 @@ from functions.manipular_textos.textos import *
 from functions.manipular_textos.manipular_textos import *
 from functions.manipular_windos.manipular_windos import *
 from functions.outras_funcoes.outras_funcoes import *
-from functions.pyaytogui.funcoes_teclado_mouse import *
+from functions.pyaytogui.funcoes_teclado_mouse import * 
 from functions.pyaytogui.google_sheets_atalhos import *
 from functions.pyaytogui.mesclar_alinhar_celulas import *
 from functions.pyaytogui.verificar_inserir_linhas import *
