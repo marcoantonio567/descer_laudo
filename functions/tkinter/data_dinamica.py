@@ -16,8 +16,22 @@ def input_data_dinamico(titulo):
     # Criar a janela principal
     root = tk.Tk()
     root.title(titulo)
-    root.geometry("400x250")
     root.configure(bg="#282c34")
+
+    # Definir o tamanho da janela
+    largura_janela = 400
+    altura_janela = 250
+
+    # Obter as dimensões da tela
+    largura_tela = root.winfo_screenwidth()
+    altura_tela = root.winfo_screenheight()
+
+    # Calcular a posição central
+    pos_x = (largura_tela // 2) - (largura_janela // 2)
+    pos_y = (altura_tela // 2) - (altura_janela // 2)
+
+    # Definir a geometria da janela (centralizada)
+    root.geometry(f'{largura_janela}x{altura_janela}+{pos_x}+{pos_y}')
 
     # Estilização
     estilo = ttk.Style()
@@ -48,5 +62,4 @@ def input_data_dinamico(titulo):
     root.mainloop()
 
     return data_selecionada  # Retorna a data escolhida
-
 
