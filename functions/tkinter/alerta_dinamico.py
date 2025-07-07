@@ -45,11 +45,18 @@ def show_alert_dinamic(message):
     root.update_idletasks()
     largura = label.winfo_reqwidth() + 40
     altura = label.winfo_reqheight() + button.winfo_reqheight() + 60
-    root.geometry(f"{largura}x{altura}")
+    
+    # Obtém as dimensões da tela
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+    
+    # Calcula a posição central
+    x = (screen_width // 2) - (largura // 2)
+    y = (screen_height // 2) - (altura // 2)
+    
+    # Define a geometria da janela (centralizada)
+    root.geometry(f"{largura}x{altura}+{x}+{y}")
 
     # Inicia o piscar
     flash()
     root.mainloop()
-
-
-    
